@@ -89,13 +89,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="sensorDataBetweenTwoDate.php" style="color: white;">
                     <i class='bx bxs-share-alt'></i>
-                    Sensor
+                    Specific Sensor
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="sensorDataBetweenTwoDate.php" style="color: white;">
                     <i class='bx bxs-alarm-add'></i>
-                    Alarm
+                    Specific Alarm
                 </a>
             </li>
             <li class="nav-item">

@@ -1,5 +1,5 @@
 .vertical-menu {
-  width: 200px;
+  width: 210px;
   height: 500px;
   overflow-y: auto;
   @media (max-width: 767px) {
