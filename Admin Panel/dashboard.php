@@ -41,7 +41,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     $active_admins = $data['TOTAL_ACTIVE_ADMIN'];
 }
 
-$sql = "SELECT COUNT(ALARM_INFORMATION.ALARM_CATEGORY) AS TOTAL_ACTIVE_ALARM FROM ALARM_INFORMATION WHERE DELETE_FLAG = 0";
+$sql = "SELECT COUNT(ALARM_CATEGORY.ALARM_NAME) AS TOTAL_ACTIVE_ALARM FROM ALARM_CATEGORY WHERE DELETE_FLAG = 0";
 $result = mysqli_query($conn, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {

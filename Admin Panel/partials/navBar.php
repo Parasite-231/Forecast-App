@@ -60,14 +60,15 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="showSensorDataAndAlarmMessageBetweenTwoDate.php" style="color: white;">
-                <i class='bx bxs-alarm-exclamation'></i>
-                Alarm
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="sensorDataBetweenTwoDate.php" style="color: white;">
                 <i class='bx bxs-calendar'></i>
+                Date
+            </a>
+        </li>
+        <li class="nav-item ">
+            <p style="color:cyan">Alarm Message based on &nbsp;<i class='bx bxs-right-arrow'></i></p>
+            <a class="nav-link " href="showAlarmMessageBetweenTwoDate.php" style="color: white;">
+                <i class='bx bx-calendar-plus'></i>
                 Date
             </a>
         </li>
