@@ -1,0 +1,10 @@
+.vertical-menu {
+  width: 200px;
+  height: 500px;
+  overflow-y: auto;
+  @media (max-width: 767px) {
+    .vertical-menu {
+      display: none;
+    }
+  }
+}

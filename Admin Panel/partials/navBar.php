@@ -7,13 +7,7 @@
 
 <body>
 
-    <div class="vertical-menu" style=" width: 225px;
-  height: 500px;
-  overflow-y: auto; @media (max-width: 767px) {
-        .vertical-menu {
-          display: none;
-        }
-      }">
+    <div class="vertical-menu">
         <ul class="nav flex-column">
             <li class="nav-item ">
 
@@ -74,7 +68,7 @@
             </li>
             <!--Alarm-->
             <li class="nav-item ">
-                <p style="color:cyan">Alarm Message based on &nbsp;<i class='bx bxs-right-arrow'></i></p>
+                <p style="color:cyan">Message based on &nbsp;<i class='bx bxs-right-arrow'></i></p>
                 <a class="nav-link" href="sensorDataBetweenTwoDate.php" style="color: white;">
                     <i class='bx bxs-location-plus'></i>
                     Multiple Locations
@@ -96,6 +90,12 @@
                 <a class="nav-link" href="sensorDataBetweenTwoDate.php" style="color: white;">
                     <i class='bx bxs-share-alt'></i>
                     Sensor
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="sensorDataBetweenTwoDate.php" style="color: white;">
+                    <i class='bx bxs-alarm-add'></i>
+                    Alarm
                 </a>
             </li>
             <li class="nav-item">
