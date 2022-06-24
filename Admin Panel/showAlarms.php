@@ -27,6 +27,7 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
     <script src="../js/printerBot.js"></script>
+    <link rel="stylesheet" href="../CSS Files/slide.css">
 
     <title>Active Alarm</title>
 
@@ -145,10 +146,12 @@ $result = mysqli_query($conn, $sql);
                 </div>
             </nav>
 
+
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;ACTIVE ALARMS
+                    <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;ACTIVE
+                        ALARMS
                     </h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <!-- <div class="btn-group me-2">
@@ -316,6 +319,7 @@ $result = mysqli_query($conn, $sql);
     </main>
   </div>
 </div> -->
+
 
 
 
