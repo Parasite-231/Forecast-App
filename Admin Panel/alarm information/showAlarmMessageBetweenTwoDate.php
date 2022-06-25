@@ -15,7 +15,7 @@ if (isset($_POST['search'])) {
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
 
-    require("../../Controllers/alarmMessageBetweenTwoDate.php");
+    require("../../Controllers/alarm based/alarmMessageBetweenTwoDate.php");
     $query = findAlarmMessageBetweenOnTwoDates($start_date,$end_date);
     $result = mysqli_query($conn, $query);
 }
