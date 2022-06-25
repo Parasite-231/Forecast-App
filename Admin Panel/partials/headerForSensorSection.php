@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 ?>
 
 <head>
@@ -43,7 +42,9 @@
     <link rel="stylesheet" href="../../CSS Files/Admin Panel Designs/slideBar.css">
 
 
-    <title>Alarm Message</title>
+
+
+    <title>Sensor Data</title>
 
 
 
