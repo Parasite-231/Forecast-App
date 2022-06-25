@@ -1,7 +1,8 @@
 <?php  
 
-include("../Database Connection/databaseConnection.php");
-require("../Functions/function.php");
+include("../../Database Connection/databaseConnection.php");
+require("function.php");
+
 
 
 
@@ -17,7 +18,7 @@ if (isset($_POST['search'])) {
    
 
     // include("../controllerOne.php");
-    require("../Controllers/sensorDataBasedOnSpecificLocationAndSensor.php");
+    require("../../Controllers/sensorDataBasedOnSpecificLocationAndSensor.php");
 
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
@@ -86,7 +87,7 @@ if (isset($_POST['search'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-    <script src="../js/printerBot.js"></script>
+    <script src="../../js/printerBot.js"></script>
 
     <title>Sensor Data</title>
 
@@ -106,7 +107,7 @@ if (isset($_POST['search'])) {
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
                 <a class="nav-link px-3" href="#" style="color: white;">Sign out</a>
@@ -119,7 +120,7 @@ if (isset($_POST['search'])) {
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
                 <div class="position-sticky pt-3">
                     <?php
-                    include("partials/navBar.php");
+                    include("../partials/navBar.php");
                     ?>
                     <hr>
 
@@ -410,7 +411,7 @@ else  if($result && mysqli_num_rows($result) <= 0){
                     crossorigin="anonymous">
                 </script>
                 <script src="dashboard.js"></script>
-                <script src="../js/dateBot.js"></script>
+                <script src="../../js/dateBot.js"></script>
 </body>
 
 </html>

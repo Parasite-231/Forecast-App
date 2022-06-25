@@ -1,9 +1,8 @@
 <?php  
-include("../Database Connection/databaseConnection.php");
-$sql = "SELECT LOCATION.LOCATION_ID AS LOCATION_ID,LOCATION.LONGITUDE AS LONGITUDE, 
-LOCATION.LATITUDE AS LATITUDE, LOCATION.LOCATION_NAME AS REGION_NAME, 
-LOCATION.DATE AS ADDED_DATE FROM LOCATION WHERE LOCATION.DELETE_FLAG = 0 
-ORDER BY LOCATION.DATE DESC";  
+include("../../Database Connection/databaseConnection.php");
+$sql = "SELECT SENSOR.SENSOR_ID AS SENSOR_ID, SENSOR.SENSOR_TYPE AS SENSOR_TYPE, 
+SENSOR.DATE AS DEPLOYED_DATE FROM SENSOR WHERE SENSOR.DELETE_FLAG = 0
+ORDER BY SENSOR.DATE DESC";  
 
 $result = mysqli_query($conn, $sql);  
  ?>
@@ -25,7 +24,7 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
     <link rel="stylesheet" href="../CSS Files/Admin Panel Designs/slideBar.css">
-    <script src="../js/printerBot.js"></script>
+    <script src="../../js/printerBot.js"></script>
 
     <title>Sensor Data</title>
 
@@ -58,7 +57,7 @@ $result = mysqli_query($conn, $sql);
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
                 <div class="position-sticky pt-3">
                     <?php
-                    include("partials/navBar.php");
+                    include("../partials/navBar.php");
                     ?>
                     <hr>
 
@@ -147,7 +146,7 @@ $result = mysqli_query($conn, $sql);
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;ACTIVE REGIONS
+                    <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;ACTIVE SENSORS
                     </h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <!-- <div class="btn-group me-2">
@@ -170,11 +169,9 @@ $result = mysqli_query($conn, $sql);
                         style=" border: 20px white;font-size: 16px;">
                         <thead>
                             <tr>
-                                <th>LOCATION ID</th>
-                                <th>LONGITUDE</th>
-                                <th>LATITUDE </th>
-                                <th>REGION NAME</th>
-                                <th>ADDED DATE</th>
+                                <th>SENSOR ID</th>
+                                <th>SENSOR TYPE</th>
+                                <th>DEPLOYED DATE</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -185,17 +182,13 @@ $result = mysqli_query($conn, $sql);
                                {  
                           ?>
                             <tr>
-                                <td><?php echo $row["LOCATION_ID"];?></td>
-                                <td><?php echo $row["LONGITUDE"]; ?></td>
-                                <td><?php echo $row["LATITUDE"]; ?></td>
-                                <td><?php echo $row["REGION_NAME"]; ?></td>
-                                <td><?php echo $row["ADDED_DATE"]; ?></td>
+                                <td><?php echo $row["SENSOR_ID"];?></td>
+                                <td><?php echo $row["SENSOR_TYPE"]; ?></td>
+                                <td><?php echo $row["DEPLOYED_DATE"]; ?></td>
                             </tr>
-
-
                             <?php  
-                               } 
-                               
+                               }  
+
                                echo "<input type='button' class='btn btn-warning' style='margin:1%' onclick='PrintTable();' value='Print'/>";
                           }
                           else{

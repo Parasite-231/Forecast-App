@@ -1,5 +1,5 @@
 <?php
-include("../Database Connection/databaseConnection.php");
+// include("../Database Connection/databaseConnection.php");
 
 function findSensorDataBasedOnSingleLocationBasedBetweenTwoDates($location_id,$start_date,$end_date){
 

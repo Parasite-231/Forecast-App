@@ -1,10 +1,40 @@
 <?php  
-include("../Database Connection/databaseConnection.php");
-$sql = "SELECT SENSOR.SENSOR_ID AS SENSOR_ID, SENSOR.SENSOR_TYPE AS SENSOR_TYPE, 
-SENSOR.DATE AS DEPLOYED_DATE FROM SENSOR WHERE SENSOR.DELETE_FLAG = 0
-ORDER BY SENSOR.DATE DESC";  
 
-$result = mysqli_query($conn, $sql);  
+include("../../Database Connection/databaseConnection.php");
+require("function.php");
+
+
+
+$result = 0;
+$selected_sensor = '';
+$sensor_id = 0;
+
+
+if (isset($_POST['search'])) {
+
+   
+
+    // include("../controllerOne.php");
+    require("../../Controllers/sensorDataBasedOnSingleSensor.php");
+
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+    $selected_sensor = $_POST['selected_sensor'];
+
+    
+    $sensor_id = "SELECT SENSOR_ID FROM SENSOR WHERE SENSOR_TYPE = '$selected_sensor' ";
+    // echo $selected_sensor;
+    $result = mysqli_query($conn, $sensor_id);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $s_id = mysqli_fetch_assoc($result);
+        $sensor_id = $s_id['SENSOR_ID'];
+        // echo "$sensor_id";
+        
+    }
+   
+    $query = findSensorDataBasedOnSingleSensorBetweenTwoDates($sensor_id,$start_date,$end_date);
+    $result = mysqli_query($conn, $query);
+}
  ?>
 <!doctype html>
 <html lang="en">
@@ -14,17 +44,40 @@ $result = mysqli_query($conn, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="../ICONS/adminsign-upicon.png">
     <link rel="stylesheet" href="../CSS Files/Admin Panel Designs/AdminDashboardDesign.css">
+
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
+    <!--  jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
     <link rel="stylesheet" href="../CSS Files/Admin Panel Designs/slideBar.css">
-    <script src="../js/printerBot.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <script src="../../js/printerBot.js"></script>
+
 
     <title>Sensor Data</title>
 
@@ -57,7 +110,7 @@ $result = mysqli_query($conn, $sql);
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
                 <div class="position-sticky pt-3">
                     <?php
-                    include("partials/navBar.php");
+                    include("../partials/navBar.php");
                     ?>
                     <hr>
 
@@ -146,8 +199,8 @@ $result = mysqli_query($conn, $sql);
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;ACTIVE SENSORS
-                    </h1>
+                    <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;SENSOR DATA
+                        BETWEEN TWO DATE BASED ON SPECIFIC LOCATION AND SENSOR </h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <!-- <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -162,155 +215,149 @@ $result = mysqli_query($conn, $sql);
                     </div>
                 </div>
 
+                <!--date-->
+                <!-- <div class="bootstrap-iso">
+                    <div class=" container-fluid">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-12"> -->
+
+                <!-- Form code begins -->
+
+
+                <div class="card w-100" style="height: auto;">
+                    <div class=" card-body" style="width: 100% ;height:auto">
+                        <form method="POST">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="control-label" for="date">From : </label>
+                                    <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
+                                        type="text" /> -->
+                                    <i class='bx bxs-calendar' style="float:right ;"></i>
+                                    <input class="form-control" type="date" placeholder="MM-DD-YYYY " id="start"
+                                        name="start_date" value="<?php echo $start_date ?>" min="2020-01-01"
+                                        max="<?php echo newDate(0) ?>" />
+
+
+                                </div>
+                                <div class="col" style="margin-bottom: 10px">
+                                    <label class="control-label" for="date">To :</label>
+                                    <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
+                                        type="text" /> -->
+                                    <i class='bx bxs-calendar' style="float:right ;"></i>
+                                    <input class="form-control" type="date" placeholder="MM-DD-YYYY" id="start"
+                                        name="end_date" value="<?php echo $end_date ?>" min="2020-01-01"
+                                        max="<?php echo newDate(0) ?>" />
+
+                                </div>
+                                <div class="col-md-4 col-lg-2 "
+                                    style="width:100%; margin: 0 auto; float: none; margin-bottom: 10px;">
+                                    <label class="control-label" for="date">Select Specific Sensor : </label>
+                                    <?php
+                                  
+
+                                    
+
+
+                                  //Gather Information
+                                  $sql_for_selected_sensor = "SELECT * FROM SENSOR ORDER BY SENSOR_ID ASC";
+                                  $result_for_selected_sensor = mysqli_query($conn, $sql_for_selected_sensor);
+
+                                  ?>
+
+                                    <select class="form-select" aria-label="Select Specific Region" id="selected_sensor"
+                                        name="selected_sensor">
+
+                                        <option value='<?php echo $selected_sensor ?>'><?php echo $selected_sensor ?>
+                                        </option>
+
+                                        <!-- Loop For Fetch Result -->
+                                        <?php while($row = mysqlI_fetch_array($result_for_selected_sensor) ) : ?>
+                                        <option value=<?php echo($row['SENSOR_TYPE']);?>>
+                                            <?php echo($row['SENSOR_TYPE']);?></option>
+
+                                        <?php endwhile; ?>
+                                        <!-- End Loop for Fetch Result -->
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Submit button -->
+                            <div class="col-md-4 col-lg-2"
+                                style="width:100%; margin: 0 auto; float: none; margin-bottom: 10px;">
+                                <button class="btn btn-info" style="margin-top:10px;width:100%" name="search"
+                                    type="submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Form code ends -->
+
+                <!-- </div> -->
+                <!-- </div>
+                    </div>
+                </div> -->
+
 
                 <!-- <h2>Section title</h2> -->
-                <div class="table-responsive">
-                    <table class="table table-bordered table-dark" id="printableTable"
-                        style=" border: 20px white;font-size: 16px;">
+                <div class="table-responsive" id="printableTable" style="margin-top:20px ;">
+                    <table class="table table-bordered table-dark" style=" border: 20px white;font-size: 16px;">
                         <thead>
                             <tr>
-                                <th>SENSOR ID</th>
+                                <th>SENSOR DATA</th>
                                 <th>SENSOR TYPE</th>
-                                <th>DEPLOYED DATE</th>
+                                <th>DATA RECORDED DATE</th>
+                                <th>REGION NAME</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php  
-                          if(mysqli_num_rows($result) > 0)  
-                          {  
-                               while($row = mysqli_fetch_array($result))  
-                               {  
-                          ?>
-                            <tr>
-                                <td><?php echo $row["SENSOR_ID"];?></td>
-                                <td><?php echo $row["SENSOR_TYPE"]; ?></td>
-                                <td><?php echo $row["DEPLOYED_DATE"]; ?></td>
-                            </tr>
-                            <?php  
-                               }  
+                            <?php
 
-                               echo "<input type='button' class='btn btn-warning' style='margin:1%' onclick='PrintTable();' value='Print'/>";
-                          }
-                          else{
-                            echo '<div class="alert alert-danger" role="alert">
-                            <img src="../ICONS/no-data.png" height="40" width="40"/>
-                            Sorry there is no such recorded data at this time !
-                          </div>';
-                          }    
-                          ?>
+if ($result && mysqli_num_rows($result) > 0) {
+    while ($list = mysqli_fetch_assoc($result)) {
+        $SENSOR_DATA = $list['SENSOR_DATA'];
+        $SENSOR_TYPE = $list['SENSOR_TYPE'];
+        $DATA_RECORDED_DATE = $list['DATA_RECORDED_DATE'];
+        $REGION_NAME = $list['REGION_NAME'];
+  
+
+        echo "
+      
+        <tr>
+            <td>$SENSOR_DATA</td>
+            <td>$SENSOR_TYPE</td>
+            <td>$DATA_RECORDED_DATE</td>
+            <td>$REGION_NAME</td>
+    
+        </tr>
+     
+        
+        
+
+        ";
+      
+    }
+    echo "<input type='button' class='btn btn-warning' style='margin:1%' onclick='PrintTable();' value='Print'/>";
+
+    echo " <a href='sensorDataBasedOnSingleSensorBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Reset</a>";
+
+    
+}
+else  if($result && mysqli_num_rows($result) <= 0){
+  echo 
+   "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+  <img src='../ICONS/folder3.png' height='40' width='40'/>
+  Sorry there is no such recorded data at this moment !
+</div>
+<a href='sensorDataBasedOnSingleSensorBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Search Again</a>
+";
+  } 
+  
+?>
 
                         </tbody>
                     </table>
                 </div>
                 <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
-                <!-- <div class="sales-boxes">
-        <div class="recent-sales box">
-            <div class="title">Recent Services</div>
 
-            <!--changed part-->
-                <!-- <div class="sales-details" style="margin-top: 23px;">
-                <table>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer Name</th>
-                        <th>Worker Name</th>
-                        <th>Worker Type</th>
-                        <th>Working Date</th>
-                        <th>Working Shift</th>
-                        <th>Worker Payment</th>
-                    </tr>
-                    
-                                <tr>
-                                    <td>id</td>
-                                    <td>name</td>
-                                    <td>name</td>
-                                    <td>type</td>
-                                    <td>date</td>
-                                    <td>shift</td>
-                                    <td>payment</td>
-                                </tr>
-                                <tr>
-                                  <td>id</td>
-                                  <td>name</td>
-                                  <td>name</td>
-                                  <td>type</td>
-                                  <td>date</td>
-                                  <td>shift</td>
-                                  <td>payment</td>
-                              </tr>
-         
-                              <tr>
-                                <td>id</td>
-                                <td>name</td>
-                                <td>name</td>
-                                <td>type</td>
-                                <td>date</td>
-                                <td>shift</td>
-                                <td>payment</td>
-                            </tr>
-       
-                            <tr>
-                              <td>id</td>
-                              <td>name</td>
-                              <td>name</td>
-                              <td>type</td>
-                              <td>date</td>
-                              <td>shift</td>
-                              <td>payment</td>
-                          </tr>
-     
-                          <tr>
-                            <td>id</td>
-                            <td>name</td>
-                            <td>name</td>
-                            <td>type</td>
-                            <td>date</td>
-                            <td>shift</td>
-                            <td>payment</td>
-                        </tr>
-   
-                        <tr>
-                          <td>id</td>
-                          <td>name</td>
-                          <td>name</td>
-                          <td>type</td>
-                          <td>date</td>
-                          <td>shift</td>
-                          <td>payment</td>
-                      </tr>
- 
-                      <tr>
-                        <td>id</td>
-                        <td>name</td>
-                        <td>name</td>
-                        <td>type</td>
-                        <td>date</td>
-                        <td>shift</td>
-                        <td>payment</td>
-                    </tr>
-
-                    <tr>
-                      <td>id</td>
-                      <td>name</td>
-                      <td>name</td>
-                      <td>type</td>
-                      <td>date</td>
-                      <td>shift</td>
-                      <td>payment</td>
-                  </tr>
-
-           
-                </table>
-            </div>
-            <div class="button" style="margin-top: 12px;">
-                <a href="#">See All</a>
-            </div>
-        </div>
-        
-    </div>
-    </main>
-  </div>
-</div> -->
 
 
 
@@ -318,11 +365,14 @@ $result = mysqli_query($conn, $sql);
 
                 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
                     integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
-                    crossorigin="anonymous"></script>
+                    crossorigin="anonymous">
+                </script>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
                     integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
-                    crossorigin="anonymous"></script>
+                    crossorigin="anonymous">
+                </script>
                 <script src="dashboard.js"></script>
+                <script src="../../js/dateBot.js"></script>
 </body>
 
 </html>

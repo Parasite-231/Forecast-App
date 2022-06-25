@@ -1,15 +1,13 @@
 <?php  
 
-include("../Database Connection/databaseConnection.php");
-require("../Functions/function.php");
+
+include("../../Database Connection/databaseConnection.php");
+require("function.php");
 
 
-
-$result = null;
-$selected_first_area = '';
-$selected_second_area = '';
-$loc_first = 0;
-$loc_second = 0;
+$result = 0;
+$selected_area = '';
+$loc = 0;
 
 
 if (isset($_POST['search'])) {
@@ -17,34 +15,26 @@ if (isset($_POST['search'])) {
    
 
     // include("../controllerOne.php");
-    require("../Controllers/sensorDataBasedOnTwoSpecificLocation.php");
+    require("../../Controllers/sensorDataBasedOnSingleLocation.php");
 
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
-    $selected_first_area = $_POST['selected_first_area'];
-    $selected_second_area = $_POST['selected_second_area'];
+    $selected_area = $_POST['selected_area'];
+    // echo  $selected_area;
+
 
     
-    $first_location_id = "SELECT LOCATION_ID FROM LOCATION WHERE LOCATION_NAME = '$selected_first_area' ";
-    // echo $selected_first_area;
-    $result = mysqli_query($conn, $first_location_id);
+    $location_id = "SELECT LOCATION_ID FROM LOCATION WHERE LOCATION_NAME = '$selected_area' ";
+    // echo $selected_area;
+    $result = mysqli_query($conn, $location_id);
     if ($result && mysqli_num_rows($result) > 0) {
-        $f_id = mysqli_fetch_assoc($result);
-        $loc_first = $f_id['LOCATION_ID'];
-        // echo "$loc_first";
-        
-    }
-    $second_location_id = "SELECT LOCATION_ID FROM LOCATION WHERE LOCATION_NAME = '$selected_second_area' ";
-    // echo $selected_second_area;
-    $result = mysqli_query($conn, $second_location_id);
-    if ($result && mysqli_num_rows($result) > 0) {
-        $s_id = mysqli_fetch_assoc($result);
-        $loc_second = $s_id['LOCATION_ID'];
-        // echo "$loc_second";
+        $l_id = mysqli_fetch_assoc($result);
+        $loc = $l_id['LOCATION_ID'];
+        // echo "$loc";
         
     }
    
-    $query =  findSensorDataBasedOnTwoSpecificLocationBetweenTwoDates($loc_first,$loc_second,$start_date,$end_date);
+    $query = findSensorDataBasedOnSingleLocationBasedBetweenTwoDates($loc,$start_date,$end_date);
     $result = mysqli_query($conn, $query);
 }
  ?>
@@ -86,7 +76,7 @@ if (isset($_POST['search'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-    <script src="../js/printerBot.js"></script>
+    <script src="../../js/printerBot.js"></script>
 
     <title>Sensor Data</title>
 
@@ -119,7 +109,7 @@ if (isset($_POST['search'])) {
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
                 <div class="position-sticky pt-3">
                     <?php
-                    include("partials/navBar.php");
+                    include("../partials/navBar.php");
                     ?>
                     <hr>
 
@@ -209,7 +199,7 @@ if (isset($_POST['search'])) {
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;SENSOR DATA
-                        BETWEEN TWO DATE BASED ON TWO SPECIFIC LOCATION </h1>
+                        BETWEEN TWO DATE BASED ON SPECIFIC LOCATION </h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <!-- <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -258,66 +248,39 @@ if (isset($_POST['search'])) {
                                         max="<?php echo newDate(0) ?>" />
 
                                 </div>
-
                                 <div class="col-md-4 col-lg-2 "
                                     style="width:100%; margin: 0 auto; float: none; margin-bottom: 10px;">
-                                    <label class="control-label" for="date">Select First Region : </label>
+                                    <label class="control-label" for="date">Select Specific Region : </label>
+
                                     <?php
                                 
 
                                     
 
 
-                                //Gather Information
-                                $sql_for_first_selected_area = "SELECT * FROM LOCATION ORDER BY LOCATION_ID ASC";
-                                $result_for_first_selected_area = mysqli_query($conn, $sql_for_first_selected_area);
+                                    //Gather Information
+                                    $sql_for_selected_area = "SELECT * FROM LOCATION ORDER BY LOCATION_ID ASC";
+                                    $result_for_selected_area = mysqli_query($conn, $sql_for_selected_area);
 
-                                ?>
+                                    ?>
+
                                     <select class="form-select" aria-label="Select Specific Region" id="selected_area"
-                                        name="selected_first_area">
+                                        name="selected_area">
 
-                                        <option value='<?php echo $selected_first_area  ?>'>
-                                            <?php echo $selected_first_area  ?>
+                                        <option value='<?php echo $selected_area ?>'><?php echo $selected_area ?>
                                         </option>
 
                                         <!-- Loop For Fetch Result -->
-                                        <?php while($row = mysqlI_fetch_array($result_for_first_selected_area) ) : ?>
+                                        <?php while($row = mysqlI_fetch_array($result_for_selected_area) ) : ?>
                                         <option value=<?php echo($row['LOCATION_NAME']);?>>
                                             <?php echo($row['LOCATION_NAME']);?></option>
 
                                         <?php endwhile; ?>
                                         <!-- End Loop for Fetch Result -->
                                     </select>
-                                </div>
-                                <div class="col-md-4 col-lg-2 "
-                                    style="width:100%; margin: 0 auto; float: none; margin-bottom: 10px;">
-                                    <label class="control-label" for="date">Select Second Region : </label>
-                                    <?php
-                                
-
-                                    
 
 
-                                //Gather Information
-                                $sql_for_second_selected_area = "SELECT * FROM LOCATION ORDER BY LOCATION_ID ASC";
-                                $result_for_second_selected_area = mysqli_query($conn, $sql_for_second_selected_area);
 
-                                ?>
-                                    <select class="form-select" aria-label="Select Specific Region" id="selected_area"
-                                        name="selected_second_area">
-
-                                        <option value='<?php echo $selected_second_area  ?>'>
-                                            <?php echo $selected_second_area  ?>
-                                        </option>
-
-                                        <!-- Loop For Fetch Result -->
-                                        <?php while($row = mysqlI_fetch_array($result_for_second_selected_area) ) : ?>
-                                        <option value=<?php echo($row['LOCATION_NAME']);?>>
-                                            <?php echo($row['LOCATION_NAME']);?></option>
-
-                                        <?php endwhile; ?>
-                                        <!-- End Loop for Fetch Result -->
-                                    </select>
                                 </div>
                             </div>
                             <!-- Submit button -->
@@ -338,7 +301,7 @@ if (isset($_POST['search'])) {
 
 
                 <!-- <h2>Section title</h2> -->
-                <div class="table-responsive" id="printableTable" style="margin-top:30px ;">
+                <div class="table-responsive" id="printableTable" style="margin-top:10px ;">
                     <table class="table table-bordered table-dark" style=" border: 20px white;font-size: 16px;">
                         <thead>
                             <tr>
@@ -378,7 +341,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
     echo "<input type='button' class='btn btn-warning' style='margin:1%' onclick='PrintTable();' value='Print'/>";
 
-    echo " <a href='sensorDataBasedOnTwoLocationBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Reset</a>";
+    echo " <a href='specificLocationBased.php' style='float:right;margin:1%' class='btn btn-danger'>Reset</a>";
 }
 else  if($result && mysqli_num_rows($result) <= 0){
   echo 
@@ -386,7 +349,7 @@ else  if($result && mysqli_num_rows($result) <= 0){
   <img src='../ICONS/folder3.png' height='40' width='40'/>
   Sorry there is no such recorded data at this moment !
 </div>
-<a href='sensorDataBasedOnTwoLocationBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Search Again</a>
+<a href='specificLocationBased.php' style='float:right;margin:1%' class='btn btn-danger'>Search Again</a>
 ";
   } 
   
@@ -411,7 +374,7 @@ else  if($result && mysqli_num_rows($result) <= 0){
                     crossorigin="anonymous">
                 </script>
                 <script src="dashboard.js"></script>
-                <script src="../js/dateBot.js"></script>
+                <script src="../../js/dateBot.js"></script>
 </body>
 
 </html>
