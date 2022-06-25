@@ -18,7 +18,7 @@ $result = mysqli_query($conn, $sql);
 
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-md-4 col-lg-2 me-0 px-3" style="text-align: center;" href="#"> <img
-                src="../ICONS/weather-modified.png" width="35px" height="35px" alt="">&nbsp;FORECAST</a>
+                src="../../ICONS/weather-modified.png" width="35px" height="35px" alt="">&nbsp;FORECAST</a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -44,7 +44,7 @@ $result = mysqli_query($conn, $sql);
                     <div class="dropdown">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="../ICONS/admin0.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                            <img src="../../ICONS/admin0.png" alt="" width="32" height="32" class="rounded-circle me-2">
                             <strong>Itadori Yuji</strong>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">

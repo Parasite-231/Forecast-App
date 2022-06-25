@@ -55,7 +55,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 <html lang="en">
 
 <?php
-                    include("./partials/headerForDashboard.php");
+                    include("partials/headerForDashboard.php");
                     ?>
 
 <body>

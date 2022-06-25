@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="../ICONS/adminsign-upicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../ICONS/adminsign-upicon.png">
     <link rel="stylesheet" href="../CSS Files/Admin Panel Designs/AdminDashboardDesign.css">
 
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
