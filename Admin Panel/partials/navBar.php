@@ -18,6 +18,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="../contact information/showContacts.php" class="nav-link " style="color: white;">
+                    <i class='bx bxs-contact'></i>
+                    Active Contacts
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="../sensor information/showSensors.php" class="nav-link " style="color: white;">
                     <i class='bx bxs-analyse'></i>
                     Active Sensors

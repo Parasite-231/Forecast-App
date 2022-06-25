@@ -255,7 +255,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
     echo "<input type='button' class='btn btn-warning' style='margin:1%' onclick='PrintTable();' value='Print'/>";
 
-    echo " <a href='sensorDataBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Reset</a>";
+    echo " <a href='showAlarmMessageBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Reset</a>";
 }
 else if($result && mysqli_num_rows($result) <= 0){
   echo 
@@ -263,7 +263,7 @@ else if($result && mysqli_num_rows($result) <= 0){
   <img src='../ICONS/folder3.png' height='40' width='40'/>
   Sorry there is no such recorded data at this moment !
 </div>
-<a href='sensorDataBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Search Again</a>
+<a href='showAlarmMessageBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Search Again</a>
 ";
   } 
   
