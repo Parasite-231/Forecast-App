@@ -94,7 +94,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="sensorDataBetweenTwoDate.php" style="color: white;">
+                <a class="nav-link" href="showAlarmMessageBasedOnSpecificAlarmBetweenTwoDate.php" style="color: white;">
                     <i class='bx bxs-alarm-add'></i>
                     Specific Alarm
                 </a>
