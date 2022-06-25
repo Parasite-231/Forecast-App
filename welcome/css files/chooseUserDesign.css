@@ -8,7 +8,7 @@
 header {
   /*to make the background a little bit dark and put transition effect*/
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("cf2.jpg");
+    url("../icons/4.jpg");
   height: 100vh;
   background-size: cover;
   background-position: center;
