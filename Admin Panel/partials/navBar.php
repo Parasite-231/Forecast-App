@@ -87,7 +87,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="sensorDataBetweenTwoDate.php" style="color: white;">
+                <a class="nav-link" href="showAlarmMessageBasedOnSingleSensorBetweenTwoDate.php" style="color: white;">
                     <i class='bx bxs-share-alt'></i>
                     Specific Sensor
                 </a>

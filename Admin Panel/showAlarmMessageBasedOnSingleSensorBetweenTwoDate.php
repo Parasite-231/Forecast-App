@@ -5,18 +5,34 @@ require("../Functions/function.php");
 
 
 
-
 $result = 0;
+$selected_sensor = '';
+$sensor_id = 0;
+
 
 if (isset($_POST['search'])) {
 
+   
+
     // include("../controllerOne.php");
+    require("../Controllers/alarmMessageBasedOnSingleSensor.php");
 
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
+    $selected_sensor = $_POST['selected_sensor'];
 
-    require("../Controllers/alarmMessageBetweenTwoDate.php");
-    $query = findAlarmMessageBetweenOnTwoDates($start_date,$end_date);
+    
+    $sensor_id = "SELECT SENSOR_ID FROM SENSOR WHERE SENSOR_TYPE = '$selected_sensor' ";
+    // echo $selected_sensor;
+    $result = mysqli_query($conn, $sensor_id);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $s_id = mysqli_fetch_assoc($result);
+        $sensor_id = $s_id['SENSOR_ID'];
+        // echo "$sensor_id";
+        
+    }
+   
+    $query = findAlarmMessageBasedOnSingleSensorBetweenOnTwoDates($sensor_id,$start_date,$end_date);
     $result = mysqli_query($conn, $query);
 }
  ?>
@@ -28,6 +44,7 @@ if (isset($_POST['search'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="../ICONS/adminsign-upicon.png">
     <link rel="stylesheet" href="../CSS Files/Admin Panel Designs/AdminDashboardDesign.css">
+
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -58,9 +75,11 @@ if (isset($_POST['search'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+
     <script src="../js/printerBot.js"></script>
 
-    <title>Alarm Data</title>
+
+    <title>Sensor Data</title>
 
 
 
@@ -180,8 +199,8 @@ if (isset($_POST['search'])) {
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;
-                        ALARM MESSAGE BETWEEN TWO DATE </h1>
+                    <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;ALARM MESSAGE
+                        BASED ON SPECIFIC SENSOR BETWEEN TWO DATE</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <!-- <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -220,7 +239,7 @@ if (isset($_POST['search'])) {
 
 
                                 </div>
-                                <div class="col">
+                                <div class="col" style="margin-bottom: 10px">
                                     <label class="control-label" for="date">To :</label>
                                     <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
                                         type="text" /> -->
@@ -229,6 +248,36 @@ if (isset($_POST['search'])) {
                                         name="end_date" value="<?php echo $end_date ?>" min="2020-01-01"
                                         max="<?php echo newDate(0) ?>" />
 
+                                </div>
+                                <div class="col-md-4 col-lg-2 "
+                                    style="width:100%; margin: 0 auto; float: none; margin-bottom: 10px;">
+                                    <label class="control-label" for="date">Select Specific Sensor : </label>
+                                    <?php
+                                  
+
+                                    
+
+
+                                  //Gather Information
+                                  $sql_for_selected_sensor = "SELECT * FROM SENSOR ORDER BY SENSOR_ID ASC";
+                                  $result_for_selected_sensor = mysqli_query($conn, $sql_for_selected_sensor);
+
+                                  ?>
+
+                                    <select class="form-select" aria-label="Select Specific Region" id="selected_sensor"
+                                        name="selected_sensor">
+
+                                        <option value='<?php echo $selected_sensor ?>'><?php echo $selected_sensor ?>
+                                        </option>
+
+                                        <!-- Loop For Fetch Result -->
+                                        <?php while($row = mysqlI_fetch_array($result_for_selected_sensor) ) : ?>
+                                        <option value=<?php echo($row['SENSOR_TYPE']);?>>
+                                            <?php echo($row['SENSOR_TYPE']);?></option>
+
+                                        <?php endwhile; ?>
+                                        <!-- End Loop for Fetch Result -->
+                                    </select>
                                 </div>
                             </div>
                             <!-- Submit button -->
@@ -272,18 +321,17 @@ if ($result && mysqli_num_rows($result) > 0) {
         $SENSOR_DATA = $list['SENSOR_DATA'];
         $SENSOR_TYPE = $list['SENSOR_TYPE'];
         $REGION_NAME = $list['REGION_NAME'];
-
   
 
         echo "
       
         <tr>
-            <td>$ALARM_NAME</td>
-            <td>$ALARM_MESSAGE</td>
-            <td>$ALARM_RECORDED_DATE</td>
-            <td>$SENSOR_DATA</td>
-            <td>$SENSOR_TYPE</td>
-            <td>$REGION_NAME</td>
+        <td>$ALARM_NAME</td>
+        <td>$ALARM_MESSAGE</td>
+        <td>$ALARM_RECORDED_DATE</td>
+        <td>$SENSOR_DATA</td>
+        <td>$SENSOR_TYPE</td>
+        <td>$REGION_NAME</td>
     
         </tr>
      
@@ -293,18 +341,19 @@ if ($result && mysqli_num_rows($result) > 0) {
         ";
       
     }
-
     echo "<input type='button' class='btn btn-warning' style='margin:1%' onclick='PrintTable();' value='Print'/>";
 
-    echo " <a href='sensorDataBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Reset</a>";
+    echo " <a href='sensorDataBasedOnSingleSensorBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Reset</a>";
+
+    
 }
-else if($result && mysqli_num_rows($result) <= 0){
+else  if($result && mysqli_num_rows($result) <= 0){
   echo 
    "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
   <img src='../ICONS/folder3.png' height='40' width='40'/>
   Sorry there is no such recorded data at this moment !
 </div>
-<a href='sensorDataBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Search Again</a>
+<a href='sensorDataBasedOnSingleSensorBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Search Again</a>
 ";
   } 
   
@@ -329,7 +378,7 @@ else if($result && mysqli_num_rows($result) <= 0){
                     crossorigin="anonymous">
                 </script>
                 <script src="dashboard.js"></script>
-                <script src="dateBot.js"></script>
+                <script src="../js/dateBot.js"></script>
 </body>
 
 </html>
