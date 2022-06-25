@@ -69,7 +69,7 @@
                     href="../Admin Panel/sensor information/sensorDataBasedOnSingleSensorBetweenTwoDate.php"
                     style="color: white;">
                     <i class='bx bxs-share-alt'></i>
-                    Sensor
+                    Specific Sensor
                 </a>
             </li>
             <li class="nav-item">

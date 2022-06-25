@@ -15,7 +15,7 @@ if (isset($_POST['search'])) {
    
 
     // include("../controllerOne.php");
-    require("../../Controllers/sensorDataBasedOnSingleLocation.php");
+    require("../../Controllers/sensor based/sensorDataBasedOnSingleLocation.php");
 
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];

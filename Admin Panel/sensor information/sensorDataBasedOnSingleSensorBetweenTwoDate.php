@@ -15,7 +15,7 @@ if (isset($_POST['search'])) {
    
 
     // include("../controllerOne.php");
-    require("../../Controllers/sensorDataBasedOnSingleSensor.php");
+    require("../../Controllers/sensor based/sensorDataBasedOnSingleSensor.php");
 
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
@@ -202,7 +202,7 @@ if (isset($_POST['search'])) {
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;SENSOR DATA
-                        BETWEEN TWO DATE BASED ON SPECIFIC LOCATION AND SENSOR </h1>
+                        BETWEEN TWO DATE BASED ON SPECIFIC SENSOR </h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <!-- <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
