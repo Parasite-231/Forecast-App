@@ -88,6 +88,7 @@ if (isset($_POST['search'])) {
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="../../js/printerBot.js"></script>
+    <link rel="stylesheet" href="../../CSS Files/Admin Panel Designs/slideBar.css">
 
     <title>Sensor Data</title>
 

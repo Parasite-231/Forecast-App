@@ -30,7 +30,7 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="../CSS Files/Admin Panel Designs/slideBar.css">
     <script src="../../js/printerBot.js"></script>
     <link rel="stylesheet" href="../CSS Files/slide.css">
-
+    <link rel="stylesheet" href="../../CSS Files/Admin Panel Designs/slideBar.css">
     <title>Active Alarm</title>
 
 

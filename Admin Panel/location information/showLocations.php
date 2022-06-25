@@ -26,7 +26,7 @@ $result = mysqli_query($conn, $sql);
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
     <link rel="stylesheet" href="../CSS Files/Admin Panel Designs/slideBar.css">
     <script src="../js/printerBot.js"></script>
-
+    <link rel="stylesheet" href="../../CSS Files/Admin Panel Designs/slideBar.css">
     <title>Sensor Data</title>
 
 

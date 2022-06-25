@@ -77,6 +77,7 @@ if (isset($_POST['search'])) {
     </script>
 
     <script src="../../js/printerBot.js"></script>
+    <link rel="stylesheet" href="../../CSS Files/Admin Panel Designs/slideBar.css">
 
 
 
