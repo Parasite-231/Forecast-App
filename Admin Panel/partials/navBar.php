@@ -69,7 +69,7 @@
             <!--Alarm-->
             <li class="nav-item ">
                 <p style="color:cyan">Message based on &nbsp;<i class='bx bxs-right-arrow'></i></p>
-                <a class="nav-link" href="sensorDataBetweenTwoDate.php" style="color: white;">
+                <a class="nav-link" href="showAlarmMessageBasedOnTwoLocationBetweenTwoDate.php" style="color: white;">
                     <i class='bx bxs-location-plus'></i>
                     Multiple Locations
                 </a>
