@@ -5,18 +5,36 @@ require("../Functions/function.php");
 
 
 
-
 $result = 0;
+$selected_area = '';
+$loc = 0;
+
 
 if (isset($_POST['search'])) {
 
+   
+
     // include("../controllerOne.php");
+    require("../Controllers/alarmMeassageBasedOnSpecificLocation.php");
 
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
+    $selected_area = $_POST['selected_area'];
+    // echo  $selected_area;
 
-    require("../Controllers/alarmMessageBetweenTwoDate.php");
-    $query = findAlarmMessageBetweenOnTwoDates($start_date,$end_date);
+
+    
+    $location_id = "SELECT LOCATION_ID FROM LOCATION WHERE LOCATION_NAME = '$selected_area' ";
+    // echo $selected_area;
+    $result = mysqli_query($conn, $location_id);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $l_id = mysqli_fetch_assoc($result);
+        $loc = $l_id['LOCATION_ID'];
+        // echo "$loc";
+        
+    }
+   
+    $query = findAlarmMessageBasedOnSpecificLocationBetweenOnTwoDates($loc,$start_date,$end_date);
     $result = mysqli_query($conn, $query);
 }
  ?>
@@ -180,8 +198,8 @@ if (isset($_POST['search'])) {
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;
-                        ALARM MESSAGE BETWEEN TWO DATE </h1>
+                    <h1 class="heading" style="font-size: 17px;"> <i class='bx bxs-notepad'></i></i>&nbsp;ALARM MESSAGE
+                        BASED ON SPECIFIC LOCATION BETWEEN TWO DATE </h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <!-- <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -220,7 +238,7 @@ if (isset($_POST['search'])) {
 
 
                                 </div>
-                                <div class="col">
+                                <div class="col" style="margin-bottom: 10px">
                                     <label class="control-label" for="date">To :</label>
                                     <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
                                         type="text" /> -->
@@ -228,6 +246,40 @@ if (isset($_POST['search'])) {
                                     <input class="form-control" type="date" placeholder="MM-DD-YYYY" id="start"
                                         name="end_date" value="<?php echo $end_date ?>" min="2020-01-01"
                                         max="<?php echo newDate(0) ?>" />
+
+                                </div>
+                                <div class="col-md-4 col-lg-2 "
+                                    style="width:100%; margin: 0 auto; float: none; margin-bottom: 10px;">
+                                    <label class="control-label" for="date">Select Specific Region : </label>
+
+                                    <?php
+                                
+
+                                    
+
+
+                                    //Gather Information
+                                    $sql_for_selected_area = "SELECT * FROM LOCATION ORDER BY LOCATION_ID ASC";
+                                    $result_for_selected_area = mysqli_query($conn, $sql_for_selected_area);
+
+                                    ?>
+
+                                    <select class="form-select" aria-label="Select Specific Region" id="selected_area"
+                                        name="selected_area">
+
+                                        <option value='<?php echo $selected_area ?>'><?php echo $selected_area ?>
+                                        </option>
+
+                                        <!-- Loop For Fetch Result -->
+                                        <?php while($row = mysqlI_fetch_array($result_for_selected_area) ) : ?>
+                                        <option value=<?php echo($row['LOCATION_NAME']);?>>
+                                            <?php echo($row['LOCATION_NAME']);?></option>
+
+                                        <?php endwhile; ?>
+                                        <!-- End Loop for Fetch Result -->
+                                    </select>
+
+
 
                                 </div>
                             </div>
@@ -249,7 +301,7 @@ if (isset($_POST['search'])) {
 
 
                 <!-- <h2>Section title</h2> -->
-                <div class="table-responsive" id="printableTable" style="margin-top:20px ;">
+                <div class="table-responsive" id="printableTable" style="margin-top:10px ;">
                     <table class="table table-bordered table-dark" style=" border: 20px white;font-size: 16px;">
                         <thead>
                             <tr>
@@ -272,18 +324,17 @@ if ($result && mysqli_num_rows($result) > 0) {
         $SENSOR_DATA = $list['SENSOR_DATA'];
         $SENSOR_TYPE = $list['SENSOR_TYPE'];
         $REGION_NAME = $list['REGION_NAME'];
-
   
 
         echo "
       
         <tr>
-            <td>$ALARM_NAME</td>
-            <td>$ALARM_MESSAGE</td>
-            <td>$ALARM_RECORDED_DATE</td>
-            <td>$SENSOR_DATA</td>
-            <td>$SENSOR_TYPE</td>
-            <td>$REGION_NAME</td>
+        <td>$ALARM_NAME</td>
+        <td>$ALARM_MESSAGE</td>
+        <td>$ALARM_RECORDED_DATE</td>
+        <td>$SENSOR_DATA</td>
+        <td>$SENSOR_TYPE</td>
+        <td>$REGION_NAME</td>
     
         </tr>
      
@@ -296,15 +347,15 @@ if ($result && mysqli_num_rows($result) > 0) {
 
     echo "<input type='button' class='btn btn-warning' style='margin:1%' onclick='PrintTable();' value='Print'/>";
 
-    echo " <a href='sensorDataBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Reset</a>";
+    echo " <a href='specificLocationBased.php' style='float:right;margin:1%' class='btn btn-danger'>Reset</a>";
 }
-else if($result && mysqli_num_rows($result) <= 0){
+else  if($result && mysqli_num_rows($result) <= 0){
   echo 
    "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
   <img src='../ICONS/folder3.png' height='40' width='40'/>
   Sorry there is no such recorded data at this moment !
 </div>
-<a href='sensorDataBetweenTwoDate.php' style='float:right;margin:1%' class='btn btn-danger'>Search Again</a>
+<a href='specificLocationBased.php' style='float:right;margin:1%' class='btn btn-danger'>Search Again</a>
 ";
   } 
   

@@ -3,7 +3,7 @@ include("../Database Connection/databaseConnection.php");
 
 
 
-function findAlarmMessageBasedOnSingleSensorBetweenOnTwoDates($sensor_id,$start_date,$end_date){
+function findAlarmMessageBasedOnSpecificLocationBetweenOnTwoDates($location_id,$start_date,$end_date){
 
 
 
@@ -27,7 +27,7 @@ function findAlarmMessageBasedOnSingleSensorBetweenOnTwoDates($sensor_id,$start_
   INNER JOIN SENSOR ON
   SENSOR_LOCATION_INFORMATION.SENSOR_ID = SENSOR.SENSOR_ID
   WHERE ALARM_CATEGORY.DELETE_FLAG = 0 AND 
-  SENSOR.SENSOR_ID = $sensor_id AND
+  LOCATION.LOCATION_ID = $location_id AND
   ALARM_INFORMATION.RECORDED_DATE BETWEEN '$start_date' AND '$end_date' 
   ORDER BY ALARM_INFORMATION.RECORDED_DATE DESC";
   

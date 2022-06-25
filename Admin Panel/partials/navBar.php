@@ -81,7 +81,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="sensorDataBetweenTwoDate.php" style="color: white;">
+                <a class="nav-link" href="showAlarmMessageBasedOnSpecificLocationBetweenTwoDate.php"
+                    style="color: white;">
                     <i class='bx bx-current-location'></i>
                     Specific Location
                 </a>
