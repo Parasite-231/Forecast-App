@@ -80,72 +80,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
                 <div class="position-sticky pt-3">
-                    <!-- <ul class="nav flex-column">
-                        <li class="nav-item ">
 
-                            <a class="nav-link active" style="color: white;" aria-current="page" href="dashboard.php">
-
-                                <i class='bx bxs-dashboard'></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="showSensors.php" class="nav-link " style="color: white;">
-                                <i class='bx bxs-analyse'></i>
-                                Active Sensors
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="showLocations.php" class="nav-link " style="color: white;">
-                                <i class='bx bxs-building-house'></i>
-                                Active Regions
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <p style="color:cyan">Data based on &nbsp;<i class='bx bxs-right-arrow'></i></p>
-                            <a class="nav-link " href="sensorDataBasedOnTwoLocationBetweenTwoDate.php"
-                                style="color: white;">
-                                <i class='bx bxs-location-plus'></i>
-                                Multiple Locations
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="sensorDataBasedOnSpecificSensorAndLocationBased.php"
-                                style="color: white;">
-                                <i class='bx bxs-edit-location'></i>
-                                Sensor & Location
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="specificLocationBased.php" style="color: white;">
-                                <i class='bx bx-current-location'></i>
-                                Specific Location
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="sensorDataBasedOnSingleSensorBetweenTwoDate.php"
-                                style="color: white;">
-                                <i class='bx bxs-share-alt'></i>
-                                Sensor
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="showSensorDataAndAlarmMessageBetweenTwoDate.php"
-                                style="color: white;">
-                                <i class='bx bxs-alarm-exclamation'></i>
-                                Alarm
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="sensorDataBetweenTwoDate.php" style="color: white;">
-                                <i class='bx bxs-calendar'></i>
-                                Date
-                            </a>
-                        </li>
-
-
-
-                    </ul> -->
                     <?php
                     include("./partials/navBarForDashboard.php");
                     ?>
