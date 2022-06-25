@@ -1,5 +1,6 @@
 <?php  
-include("../Database Connection/databaseConnection.php");
+include("../../Database Connection/databaseConnection.php");
+
 $sql = "SELECT ALARM_CATEGORY.ALARM_ID AS ALARM_ID, 
 ALARM_CATEGORY.ALARM_NAME AS ALARM_NAME, 
 ALARM_CATEGORY.ALARM_MESSAGE AS CORRESPONDING_MESSAGE, 
@@ -27,7 +28,7 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
     <link rel="stylesheet" href="../CSS Files/Admin Panel Designs/slideBar.css">
-    <script src="../js/printerBot.js"></script>
+    <script src="../../js/printerBot.js"></script>
     <link rel="stylesheet" href="../CSS Files/slide.css">
 
     <title>Active Alarm</title>
@@ -61,7 +62,7 @@ $result = mysqli_query($conn, $sql);
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
                 <div class="position-sticky pt-3">
                     <?php
-                    include("partials/navBar.php");
+                    include("../partials/navBar.php");
                     ?>
                     <hr>
 

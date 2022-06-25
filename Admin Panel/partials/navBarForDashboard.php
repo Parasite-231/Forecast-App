@@ -11,14 +11,14 @@
         <ul class="nav flex-column">
             <li class="nav-item ">
 
-                <a class="nav-link active" style="color: white;" aria-current="page" href="../dashboard.php">
+                <a class="nav-link active" style="color: white;" aria-current="page" href="./dashboard.php">
 
                     <i class='bx bxs-dashboard'></i>
                     Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a href="../sensor information/showSensors.php" class="nav-link " style="color: white;">
+                <a href="../Admin Panel/sensor information/showSensors.php" class="nav-link " style="color: white;">
                     <i class='bx bxs-analyse'></i>
                     Active Sensors
                 </a>
@@ -26,7 +26,7 @@
 
             <!--Active Location-->
             <li class="nav-item">
-                <a href="../location information/showLocations.php" class="nav-link " style="color: white;">
+                <a href="../Admin Panel/location information/showLocations.php" class="nav-link " style="color: white;">
                     <i class='bx bxs-building-house'></i>
                     Active Regions
                 </a>
@@ -34,41 +34,47 @@
 
 
             <li class="nav-item">
-                <a href="../alarm information/showAlarms.php" class="nav-link " style="color: white;">
+                <a href="../Admin Panel/sensor information/alarm information/showAlarms.php" class="nav-link "
+                    style="color: white;">
                     <i class='bx bxs-alarm-exclamation'></i>
                     Active Alarms
                 </a>
             </li>
             <li class="nav-item ">
                 <p style="color:cyan">Data based on &nbsp;<i class='bx bxs-right-arrow'></i></p>
-                <a class="nav-link " href="../sensor information/sensorDataBasedOnTwoLocationBetweenTwoDate.php"
+                <a class="nav-link "
+                    href="../Admin Panel/sensor information/sensorDataBasedOnTwoLocationBetweenTwoDate.php"
                     style="color: white;">
                     <i class='bx bxs-location-plus'></i>
                     Multiple Locations
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="../sensor information/sensorDataBasedOnSpecificSensorAndLocationBased.php"
+                <a class="nav-link"
+                    href="../Admin Panel/sensor information/sensorDataBasedOnSpecificSensorAndLocationBased.php"
                     style="color: white;">
                     <i class='bx bxs-edit-location'></i>
                     Sensor & Location
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="../sensor information/specificLocationBased.php" style="color: white;">
+                <a class="nav-link" href="../Admin Panel/sensor information/specificLocationBased.php"
+                    style="color: white;">
                     <i class='bx bx-current-location'></i>
                     Specific Location
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../sensor information/sensorDataBasedOnSingleSensorBetweenTwoDate.php"
+                <a class="nav-link"
+                    href="../Admin Panel/sensor information/sensorDataBasedOnSingleSensorBetweenTwoDate.php"
                     style="color: white;">
                     <i class='bx bxs-share-alt'></i>
                     Sensor
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../sensor information/sensorDataBetweenTwoDate.php" style="color: white;">
+                <a class="nav-link" href="../Admin Panel/sensor information/sensorDataBetweenTwoDate.php"
+                    style="color: white;">
                     <i class='bx bxs-calendar'></i>
                     Date
                 </a>
@@ -81,14 +87,16 @@
 
             <li class="nav-item ">
                 <p style="color:cyan">Message based on &nbsp;<i class='bx bxs-right-arrow'></i></p>
-                <a class="nav-link" href="../alarm information/showAlarmMessageBasedOnTwoLocationBetweenTwoDate.php"
+                <a class="nav-link"
+                    href="../Admin Panel/alarm information/showAlarmMessageBasedOnTwoLocationBetweenTwoDate.php"
                     style="color: white;">
                     <i class='bx bxs-location-plus'></i>
                     Multiple Locations
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../alarm information/showAlarmMessageBasedOnSpecificSensorAndLocation.php"
+                <a class="nav-link"
+                    href="../Admin Panel/alarm information/showAlarmMessageBasedOnSpecificSensorAndLocation.php"
                     style="color: white;">
                     <i class='bx bxs-edit-location'></i>
                     Sensor & Locations
@@ -96,28 +104,30 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link"
-                    href="../alarm information/showAlarmMessageBasedOnSpecificLocationBetweenTwoDate.php"
+                    href="../Admin Panel/alarm information/showAlarmMessageBasedOnSpecificLocationBetweenTwoDate.php"
                     style="color: white;">
                     <i class='bx bx-current-location'></i>
                     Specific Location
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../alarm information/showAlarmMessageBasedOnSingleSensorBetweenTwoDate.php"
+                <a class="nav-link"
+                    href="../Admin Panel/alarm information/showAlarmMessageBasedOnSingleSensorBetweenTwoDate.php"
                     style="color: white;">
                     <i class='bx bxs-share-alt'></i>
                     Specific Sensor
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../alarm information/showAlarmMessageBasedOnSpecificAlarmBetweenTwoDate.php"
+                <a class="nav-link"
+                    href="../Admin Panel/alarm information/showAlarmMessageBasedOnSpecificAlarmBetweenTwoDate.php"
                     style="color: white;">
                     <i class='bx bxs-alarm-add'></i>
                     Specific Alarm
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../alarm information/showAlarmMessageBetweenTwoDate.php"
+                <a class="nav-link" href="../Admin Panel/alarm information/showAlarmMessageBetweenTwoDate.php"
                     style="color: white;">
                     <i class='bx bx-calendar-plus'></i>
                     Date

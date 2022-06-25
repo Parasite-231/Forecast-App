@@ -78,6 +78,9 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 
 
+
+
+
 </head>
 
 <body>
@@ -169,7 +172,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
                     </ul> -->
                     <?php
-                    include("partials/navBar.php");
+                    include("./partials/navBarForDashboard.php");
                     ?>
                     <hr>
 
