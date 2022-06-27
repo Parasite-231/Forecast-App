@@ -7,8 +7,10 @@ $result = mysqli_query($conn, $sql);
 $active_admins = 0 ;
 $active_locations = 0;
 $active_sensors = 0;
+$sensor_types = 0;
 $active_contacts = 0;
-$active_alarms = 0;
+$alarm_categories = 0;
+$active_working_alarms = 0;
 $active_admins = 0;
 
 
@@ -18,12 +20,12 @@ if ($result && mysqli_num_rows($result) > 0) {
     $active_locations = $data['TOTAL_ACTIVE_LOCATION'];
 }
 
-$sql = "SELECT COUNT(SENSOR.SENSOR_ID) AS TOTAL_ACTIVE_SENSOR FROM SENSOR WHERE DELETE_FLAG = 0";
+$sql = "SELECT COUNT(SENSOR.SENSOR_ID) AS TOTAL_SENSOR_TYPE FROM SENSOR WHERE DELETE_FLAG = 0";
 $result = mysqli_query($conn, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
     $data = mysqli_fetch_assoc($result);
-    $active_sensors = $data['TOTAL_ACTIVE_SENSOR'];
+    $sensor_types = $data['TOTAL_SENSOR_TYPE'];
 }
 $sql = "SELECT COUNT(CONTACT_INFORMATION.CONTACT_ID) AS TOTAL_ACTIVE_CONTACTS FROM CONTACT_INFORMATION WHERE DELETE_FLAG = 0";
 $result = mysqli_query($conn, $sql);
@@ -41,12 +43,23 @@ if ($result && mysqli_num_rows($result) > 0) {
     $active_admins = $data['TOTAL_ACTIVE_ADMIN'];
 }
 
-$sql = "SELECT COUNT(ALARM_CATEGORY.ALARM_NAME) AS TOTAL_ACTIVE_ALARM FROM ALARM_CATEGORY WHERE DELETE_FLAG = 0";
+$sql = "SELECT COUNT(ALARM_CATEGORY.ALARM_NAME) AS TOTAL_ALARM_CATEGORY FROM ALARM_CATEGORY WHERE DELETE_FLAG = 0";
 $result = mysqli_query($conn, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
     $data = mysqli_fetch_assoc($result);
-    $active_alarms = $data['TOTAL_ACTIVE_ALARM'];
+    $alarm_categories = $data['TOTAL_ALARM_CATEGORY'];
+}
+
+$sql = 
+"SELECT COUNT( ALARM_INFORMATION.ALARM_ID) AS ACTIVE_ALARMS FROM ALARM_INFORMATION 
+INNER JOIN SENSOR_DATA_AND_ALARM_INFORMATION 
+ON ALARM_INFORMATION.ALARM_INFO_ID = SENSOR_DATA_AND_ALARM_INFORMATION.ALARM_INFO_ID";
+$result = mysqli_query($conn, $sql);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $data = mysqli_fetch_assoc($result);
+    $active_working_alarms = $data['ACTIVE_ALARMS'];
 }
 
 ?>
@@ -191,69 +204,107 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 
                 <div class="row row-cols-1 row-cols-md-4 g-4">
-                    <div class="col">
-                        <div class="card">
+                    <a href="./contact information/showContacts.php" disabled="disabled"
+                        style="text-decoration:none;color:black">
+                        <div class="col">
+                            <div class="card">
 
-                            <div class="card-body">
-                                <h5 class="card-title">Active Locations <img src="../ICONS/location.png" height="60px"
-                                        width="60px" style="float: right;" class="card-img-left" alt="..."></h5>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text" style="font-size: 30px;">&nbsp;<?php echo $active_locations ?></p>
+                                <div class="card-body">
+                                    <h5 class="card-title">Active Locations <img src="../ICONS/location.png"
+                                            height="60px" width="60px" style="float: right;" class="card-img-left"
+                                            alt="..."></h5>
+                                    <p class="card-text"></p>
+                                    <p class="card-text"></p>
+                                    <p class="card-text" style="font-size: 30px;">&nbsp;<?php echo $active_locations ?>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
+                    </a>
+                    <a href="./sensor information/showSensors.php" disabled="disabled"
+                        style="text-decoration:none;color:black">
+                        <div class="col">
+                            <div class="card">
 
-                            <div class="card-body">
-                                <h5 class="card-title">Active Sensors <img src="../ICONS/sensor.png" height="50px"
-                                        width="50px" style="float: right;" class="card-img-left" alt="..."></h5>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text" style="font-size: 30px;">&nbsp;<?php echo $active_sensors ?> </p>
+                                <div class="card-body">
+                                    <h5 class="card-title">Sensor Types <img src="../ICONS/sensor.png" height="50px"
+                                            width="50px" style="float: right;" class="card-img-left" alt="..."></h5>
+                                    <p class="card-text"></p>
+                                    <p class="card-text"></p>
+                                    <p class="card-text" style="font-size: 30px;">&nbsp;<?php echo $sensor_types ?>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
+                    </a>
+                    <a href="./contact information/showContacts.php" disabled="disabled"
+                        style="text-decoration:none;color:black">
+                        <div class="col">
+                            <div class="card">
 
-                            <div class="card-body">
-                                <h5 class="card-title">Active Contacts <img src="../ICONS/global-connection.png"
-                                        height="50px" width="50px" style="float: right;" class="card-img-left"
-                                        alt="..."></h5>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text" style="font-size: 30px;">&nbsp;<?php echo $active_contacts ?></p>
+                                <div class="card-body">
+                                    <h5 class="card-title">Active Contacts <img src="../ICONS/global-connection.png"
+                                            height="50px" width="50px" style="float: right;" class="card-img-left"
+                                            alt="..."></h5>
+                                    <p class="card-text"></p>
+                                    <p class="card-text"></p>
+                                    <p class="card-text" style="font-size: 30px;">&nbsp;<?php echo $active_contacts ?>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
+                    </a>
+                    <a href="./alarm information/showAlarms.php" disabled="disabled"
+                        style="text-decoration:none;color:black">
+                        <div class="col">
+                            <div class="card">
 
-                            <div class="card-body">
-                                <h5 class="card-title">Active Alarms <img src="../ICONS/alarm.png" height="50px"
-                                        width="50px" style="float: right;" class="card-img-left" alt="..."></h5>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text" style="font-size: 30px;">&nbsp;<?php echo $active_alarms ?> </p>
+                                <div class="card-body">
+                                    <h5 class="card-title"> Alarm Categories<img src="../ICONS/alarm.png" height="50px"
+                                            width="50px" style="float: right;" class="card-img-left" alt="..."></h5>
+                                    <p class="card-text"></p>
+                                    <p class="card-text"></p>
+                                    <p class="card-text" style="font-size: 30px;">&nbsp;<?php echo $alarm_categories ?>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
+                    </a>
+                    <a href="./alarm information/showActiveAlarms.php" disabled="disabled"
+                        style="text-decoration:none;color:black">
+                        <div class="col">
+                            <div class="card">
 
-                            <div class="card-body">
-                                <h5 class="card-title">Active Admins <img src="../ICONS/activeadmin.png" height="50px"
-                                        width="50px" style="float: right;" class="card-img-left" alt="..."></h5>
-                                <p class="card-text"></p>
-                                <p class="card-text"></p>
-                                <p class="card-text" style="font-size: 30px;">&nbsp;<?php echo $active_admins ?> </p>
+                                <div class="card-body">
+                                    <h5 class="card-title">Active Alarms <img src="../ICONS/radar2.png" height="50px"
+                                            width="50px" style="float: right;" class="card-img-left" alt="..."></h5>
+                                    <p class="card-text"></p>
+                                    <p class="card-text"></p>
+                                    <p class="card-text" style="font-size: 30px;">
+                                        &nbsp;<?php echo $active_working_alarms ?>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
+                    <a href="#" disabled="disabled" style="text-decoration:none;color:black">
+                        <div class="col">
+                            <div class="card">
 
-                    <div class="col">
+                                <div class="card-body">
+                                    <h5 class="card-title">Active Admins <img src="../ICONS/activeadmin.png"
+                                            height="50px" width="50px" style="float: right;" class="card-img-left"
+                                            alt="..."></h5>
+                                    <p class="card-text"></p>
+                                    <p class="card-text"></p>
+                                    <p class="card-text" style="font-size: 30px;">&nbsp;<?php echo $active_admins ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- <div class="col">
                         <div class="card">
 
                             <div class="card-body">
@@ -280,7 +331,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
 
 

@@ -26,7 +26,7 @@
             <li class="nav-item">
                 <a href="../sensor information/showSensors.php" class="nav-link " style="color: white;">
                     <i class='bx bxs-analyse'></i>
-                    Active Sensors
+                    Sensor Types
                 </a>
             </li>
 
@@ -42,6 +42,12 @@
             <li class="nav-item">
                 <a href="../alarm information/showAlarms.php" class="nav-link " style="color: white;">
                     <i class='bx bxs-alarm-exclamation'></i>
+                    Alarm Categories
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../alarm information/showActiveAlarms.php" class="nav-link " style="color: white;">
+                    <i class='bx bx-radar'></i>
                     Active Alarms
                 </a>
             </li>
