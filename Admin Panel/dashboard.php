@@ -287,7 +287,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                             </div>
                         </div>
                     </a>
-                    <a href="#" disabled="disabled" style="text-decoration:none;color:black">
+                    <!-- <a href="#" disabled="disabled" style="text-decoration:none;color:black">
                         <div class="col">
                             <div class="card">
 
@@ -302,7 +302,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </a> -->
 
                     <!-- <div class="col">
                         <div class="card">

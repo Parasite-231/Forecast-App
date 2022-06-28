@@ -1,17 +1,14 @@
 <?php  
 include("../../Database Connection/databaseConnection.php");
 
-$sql = "SELECT DISTINCT ALARM_CATEGORY.ALARM_ID AS ALARM_CATEGORY_ID, ALARM_CATEGORY.ALARM_NAME AS ALARM_NAME,
-ALARM_CATEGORY.ALARM_MESSAGE AS ALARM_MESSAGE,
-ALARM_CATEGORY.ADDED_DATE AS ALARM_DEPLOYED_DATE
-FROM ALARM_CATEGORY 
-INNER JOIN ALARM_INFORMATION ON
-ALARM_INFORMATION.ALARM_ID = ALARM_CATEGORY.ALARM_ID 
-INNER JOIN SENSOR_DATA_AND_ALARM_INFORMATION ON
-SENSOR_DATA_AND_ALARM_INFORMATION.ALARM_INFO_ID = ALARM_INFORMATION.ALARM_INFO_ID
-WHERE ALARM_CATEGORY.DELETE_FLAG = 0 ";  
+require("../../Controllers/alarm based/alarmActiveBasedOnExistingContacts.php");
 
-$result = mysqli_query($conn, $sql);  
+
+
+$query = findAlarmActiveBasedOnExistingContacts();
+$result = mysqli_query($conn, $query);
+
+
  ?>
 <!doctype html>
 <html lang="en">
@@ -153,13 +150,19 @@ $result = mysqli_query($conn, $sql);
                 <!-- <h2>Section title</h2> -->
                 <div class="table-responsive">
                     <table class="table table-bordered table-dark" id="printableTable"
-                        style=" border: 20px white;font-size: 16px;">
+                        style=" border: 20px white;font-size: 16px;text-align:center">
                         <thead>
                             <tr>
                                 <th>ALARM CATEGORY ID</th>
                                 <th>ALARM NAME</th>
                                 <th>ALARM MESSAGE</th>
-                                <th>ALARM DEPLOYED DATE</th>
+                                <th>ALARM RECORDED DATE</th>
+                                <th>SENSOR DATA</th>
+                                <th>SENSOR TYPE</th>
+                                <th>REGION NAME</th>
+                                <th>CONTACT MAIL</th>
+                                <!-- <th>CONTACT NUMBER</th> -->
+
 
 
                             </tr>
@@ -175,7 +178,13 @@ $result = mysqli_query($conn, $sql);
                                 <td><?php echo $row["ALARM_CATEGORY_ID"];?></td>
                                 <td><?php echo $row["ALARM_NAME"]; ?></td>
                                 <td><?php echo $row["ALARM_MESSAGE"]; ?></td>
-                                <td><?php echo $row["ALARM_DEPLOYED_DATE"]; ?></td>
+                                <td><?php echo $row["ALARM_RECORDED_DATE"]; ?></td>
+                                <td><?php echo $row["SENSOR_DATA"]; ?></td>
+                                <td><?php echo $row["SENSOR_TYPE"]; ?></td>
+                                <td><?php echo $row["REGION_NAME"]; ?></td>
+                                <td><?php echo $row["CONTACT_EMAIL"]; ?></td>
+
+
 
                             </tr>
                             <?php  
