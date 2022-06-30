@@ -160,8 +160,8 @@ $result = mysqli_query($conn, $query);
                                 <th>SENSOR DATA</th>
                                 <th>SENSOR TYPE</th>
                                 <th>REGION NAME</th>
-                                <th>CONTACT MAIL</th>
-                                <!-- <th>CONTACT NUMBER</th> -->
+                                <th>CONTACT EMAIL</th>
+                                <th>CONTACT NUMBER</th>
 
 
 
@@ -183,6 +183,7 @@ $result = mysqli_query($conn, $query);
                                 <td><?php echo $row["SENSOR_TYPE"]; ?></td>
                                 <td><?php echo $row["REGION_NAME"]; ?></td>
                                 <td><?php echo $row["CONTACT_EMAIL"]; ?></td>
+                                <td><?php echo $row["CONTACT_NUMBER"]; ?></td>
 
 
 
