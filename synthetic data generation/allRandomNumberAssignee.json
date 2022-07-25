@@ -1,0 +1,188 @@
+{
+  "LocationIDRange": [
+    {
+      "minimumValueForLocationId": 1,
+      "maximumValueForLocationId": 10
+    }
+  ],
+  "SensorIDRange": [
+    {
+      "minimumValueForSensorId": 1,
+      "maximumValueForSensorId": 7
+    }
+  ],
+  "TempValueRange": [
+    {
+      "minRandTemp": 14.5,
+      "maxRandTemp": 24.6
+    },
+    {
+      "minRandTemp": 17.9,
+      "maxRandTemp": 28.5
+    },
+    {
+      "minRandTemp": 22.1,
+      "maxRandTemp": 32.1
+    },
+    {
+      "minRandTemp": 24.8,
+      "maxRandTemp": 33.5
+    },
+    {
+      "minRandTemp": 25.7,
+      "maxRandTemp": 32.9
+    },
+    {
+      "minRandTemp": 27,
+      "maxRandTemp": 32.4
+    },
+    {
+      "minRandTemp": 27.2,
+      "maxRandTemp": 31.7
+    },
+    {
+      "minRandTemp": 27.2,
+      "maxRandTemp": 31.9
+    },
+    {
+      "minRandTemp": 27,
+      "maxRandTemp": 31.9
+    },
+    {
+      "minRandTemp": 25.3,
+      "maxRandTemp": 31.4
+    },
+    {
+      "minRandTemp": 21.3,
+      "maxRandTemp": 29.4
+    },
+    {
+      "minRandTemp": 16.7,
+      "maxRandTemp": 25.7
+    }
+  ],
+  "SmokeValueRange": [
+    {
+      "minRandSmoke": 0.0,
+      "maxRandSmoke": 200.0
+    }
+  ],
+  "HumidValueRange": [
+    {
+      "minRandHumid": 43,
+      "maxRandHumid": 63
+    },
+    {
+      "minRandHumid": 35,
+      "maxRandHumid": 55
+    },
+    {
+      "minRandHumid": 38,
+      "maxRandHumid": 58
+    },
+    {
+      "minRandHumid": 49,
+      "maxRandHumid": 69
+    },
+    {
+      "minRandHumid": 58,
+      "maxRandHumid": 78
+    },
+    {
+      "minRandHumid": 66,
+      "maxRandHumid": 86
+    },
+    {
+      "minRandHumid": 71,
+      "maxRandHumid": 91
+    },
+    {
+      "minRandHumid": 70,
+      "maxRandHumid": 90
+    },
+    {
+      "minRandHumid": 70,
+      "maxRandHumid": 90
+    },
+    {
+      "minRandHumid": 66,
+      "maxRandHumid": 86
+    },
+    {
+      "minRandHumid": 57,
+      "maxRandHumid": 77
+    },
+    {
+      "minRandHumid": 50,
+      "maxRandHumid": 60
+    }
+  ],
+  "COValueRange": [
+    {
+      "minRandCO": 0.0,
+      "maxRandCO": 200.0
+    }
+  ],
+  "PM2_5ValueRange": [
+    {
+      "minRandPM2_5": 204,
+      "maxRandPM2_5": 214
+    },
+    {
+      "minRandPM2_5": 162,
+      "maxRandPM2_5": 172
+    },
+    {
+      "minRandPM2_5": 114,
+      "maxRandPM2_5": 124
+    },
+    {
+      "minRandPM2_5": 70,
+      "maxRandPM2_5": 80
+    },
+    {
+      "minRandPM2_5": 48,
+      "maxRandPM2_5": 58
+    },
+    {
+      "minRandPM2_5": 33,
+      "maxRandPM2_5": 43
+    },
+    {
+      "minRandPM2_5": 28,
+      "maxRandPM2_5": 38
+    },
+    {
+      "minRandPM2_5": 21,
+      "maxRandPM2_5": 31
+    },
+    {
+      "minRandPM2_5": 41,
+      "maxRandPM2_5": 51
+    },
+    {
+      "minRandPM2_5": 129,
+      "maxRandPM2_5": 139
+    },
+    {
+      "minRandPM2_5": 129,
+      "maxRandPM2_5": 139
+    },
+    {
+      "minRandPM2_5": 165,
+      "maxRandPM2_5": 175
+    }
+  ],
+  "MethaneValueRange": [
+    {
+      "minRandMethane": 0.0,
+      "maxRandMethane": 200.0
+    }
+  ],
+  "CO2ValueRange": [
+    {
+      "minRandCO2": 0.0,
+      "maxRandCO2": 200.0
+    }
+  ]
+}

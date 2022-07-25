@@ -1,0 +1,22 @@
+
+
+master method-> synthetic data gen()
+1 method -> 3 query 
+
+php_var = SELECT MAX(SENSOR_LOCATION_ID) AS MAX_id FROM
+SENSOR_LOCATION_INFORMATION WHERE 
+DELETE_FLAG = 0;
+
+
+INSERT INTO 
+SENSOR_LOCATION_INFORMATION
+(LOCATION_ID,
+SENSOR_ID) VALUES(1,2);-->
+start & end var --> range int rand()
+
+
+INSERT INTO 
+SENSOR_DATA(VALUE,SENSOR_LOCATION_ID)
+VALUES(23,php_var+1); 
+        |
+        rand()
