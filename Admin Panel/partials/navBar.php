@@ -136,6 +136,15 @@
                 </a>
             </li>
 
+            <!--Map-->
+
+            <li class="nav-item">
+                <a class="nav-link" href="../map information/displayMap.php" style="color: white;">
+                    <i class='bx bx-map'></i>
+                    Google Map
+                </a>
+            </li>
+
 
 
         </ul>

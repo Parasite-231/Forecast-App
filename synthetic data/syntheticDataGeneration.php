@@ -1,28 +1,21 @@
-<?php
+b<?php
+include("./Database Connection/db_connect.php");
 
-
-function generateSyntheticData()
+function generateSyntheticData($month,$jsonDataDecoded,$conn)
 {
-    include("./Database Connection/db_connect.php");
+
+  
+    
 
     $maxSensorLocationId = 0;
 
-    //1.import config file(.json/.txt/.csv)
-    //2.parse config file
-    //3.retrieve values from config file
-    //4.assign those values in the following vars accordingly
-
-    // Read the JSON file 
-    $readFromJsonFile = file_get_contents('allRandomNumberAssignee.json');
-
-    // Decode the JSON file
-    $jsonDataDecoded = json_decode($readFromJsonFile,true);
+    
 
     // echo $jsonDataDecoded['LocationIDRange'][0]['minimumValueForLocationId'];
     
 
      //current month num val by explode+...
-     $month = date('m'); 
+    //  $month = date('m'); 
     //  echo " ".$month."  ";
 
     //setting min and max value range
@@ -97,16 +90,10 @@ function generateSyntheticData()
 
     // insertion query in SENSOR_LOCATION_INFORMATION Table
     $insertionQueryInSensorLocationInformation = "INSERT INTO SENSOR_LOCATION_INFORMATION(LOCATION_ID,SENSOR_ID) VALUES
-    ($randomLocationId,$randomSensorId),
-    ($randomLocationId,$randomSensorId),
-    ($randomLocationId,$randomSensorId),
-    ($randomLocationId,$randomSensorId),
-    ($randomLocationId,$randomSensorId),
-    ($randomLocationId,$randomSensorId),
     ($randomLocationId,$randomSensorId)";
 
     if (mysqli_query($conn, $insertionQueryInSensorLocationInformation)) {
-        echo "The query was successfully executed. Record was inserted into SENSOR_LOCATION_INFORMATION Table!<br />";
+        // echo "The query was successfully executed. Record was inserted into SENSOR_LOCATION_INFORMATION Table!<br />";
     //    echo "<b>Data: $insertionQueryInSensorLocationInformation </b><br /><br />";
    } else {
         echo "The query could not be executed!<br />" . mysqli_error($conn);
@@ -124,7 +111,7 @@ function generateSyntheticData()
     ($randCO2Val,$maxSensorLocationId+1),
     ($randSmokeVal,$maxSensorLocationId+1)";
     if (mysqli_query($conn, $insertionQueryInSensorDataTable)) {
-        echo "The query was successfully executed. Record was inserted into SENSOR_DATA Table!<br />";
+        // echo "The query was successfully executed. Record was inserted into SENSOR_DATA Table!<br />";
     //    echo "<b>Data: $insertionQueryInSensorDataTable </b><br /><br />";
    } else {
         echo "The query could not be executed!" . mysqli_error($conn);
@@ -150,6 +137,35 @@ function generateSyntheticData()
     // echo "Random Smoke Data Value : $randSmokeVal";
     return 0;
 }
+    
 
-generateSyntheticData();
+
+    //1.import config file(.json/.txt/.csv)
+    //2.parse config file
+    //3.retrieve values from config file
+    //4.assign those values in the following vars accordingly
+
+    // Read the JSON file 
+    $readFromJsonFile = file_get_contents('allRandomNumberAssignee.json');
+
+    // Decode the JSON file
+    $jsonDataDecoded = json_decode($readFromJsonFile,true);
+    
+    for ($i=0; $i < $jsonDataDecoded['NumberOfGeneratedData'][0]['MaxNumberOfGeneratedData']; $i++) { 
+
+        $month = rand(1,12);
+        echo $i;
+        echo "</br>";
+
+        
+        echo "Now I am calling function for the $i th time...</br>";
+        generateSyntheticData($month,$jsonDataDecoded,$conn);
+        echo "I am sleeping now for 4s for the $i th time </br>";
+        sleep(4);
+        echo "Sleeping done for the $i th time...</br>";
+        echo "</br>";
+       
+    }
+
+    
 ?>

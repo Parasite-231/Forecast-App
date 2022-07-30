@@ -1,4 +1,9 @@
 {
+  "NumberOfGeneratedData": [
+    {
+      "MaxNumberOfGeneratedData": 10
+    }
+  ],
   "LocationIDRange": [
     {
       "minimumValueForLocationId": 1,
